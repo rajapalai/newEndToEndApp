@@ -12,6 +12,10 @@ public class ResourceNotFoundException extends RuntimeException {
         this.fieldValue = fieldValue;
     }
 
+    public ResourceNotFoundException() {
+
+    }
+
     public String getResourceName() {
         return resourceName;
     }

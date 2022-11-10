@@ -8,8 +8,8 @@ import java.util.List;
 public class EmployeeDesignationTypeValidator implements ConstraintValidator<EmployeeDesignationTypeValidation, String> {
 
     @Override
-    public boolean isValid(String employeeDesignation, ConstraintValidatorContext context){
+    public boolean isValid(String designation, ConstraintValidatorContext context){
         List list = Arrays.asList("DEVOPS","DEVELOPER","TESTER","CONSULTANT","ASSOCIATE-ENGINEER","SR.CONSULTANT");
-        return list.contains(employeeDesignation);
+        return list.contains(designation);
     }
 }

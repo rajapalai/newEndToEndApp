@@ -31,11 +31,11 @@ public class EmployeeRequestDTO {
 	private double employeeSalary;
 
 	@Email(message = "Invalid email Id")
-	private String employeeEmail;
+	private String email;
 
 	@Pattern(regexp = "^[0-9]{10}$")
-	private String employeeContactNumber;
+	private String contactNumber;
 
 	@EmployeeDesignationTypeValidation
-	private String employeeDesignation;
+	private String designation;
 }

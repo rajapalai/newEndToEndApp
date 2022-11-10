@@ -26,8 +26,10 @@ public class EmployeeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeId;
 
+	@Column(unique = true)
 	private String employeeFirstName;
 
+	@Column(unique = true)
 	private String employeeLastName;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
@@ -35,9 +37,11 @@ public class EmployeeEntity {
 
 	private double employeeSalary;
 
-	private String employeeEmail;
+	@Column(unique = true)
+	private String email;
 
-	private String employeeContactNumber;
+	@Column(unique = true)
+	private String contactNumber;
 
-	private String employeeDesignation;
+	private String designation;
 }

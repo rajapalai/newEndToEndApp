@@ -14,9 +14,9 @@ public class EmployeeAppUtil {
 	    employeeEntity.setEmployeeLastName(employeeRequestDTO.getEmployeeLastName());
 	    employeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
 	    employeeEntity.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
-		employeeEntity.setEmployeeEmail(employeeEntity.getEmployeeEmail());
-		employeeEntity.setEmployeeContactNumber(employeeEntity.getEmployeeContactNumber());
-		employeeEntity.setEmployeeDesignation(employeeEntity.getEmployeeDesignation());
+		employeeEntity.setEmail(employeeRequestDTO.getEmail());
+		employeeEntity.setContactNumber(employeeRequestDTO.getContactNumber());
+		employeeEntity.setDesignation(employeeRequestDTO.getDesignation());
 	    return employeeEntity;
 	}
 
@@ -29,9 +29,10 @@ public class EmployeeAppUtil {
 	    employeeResponseDTO.setEmployeeLastName(employeeEntity.getEmployeeLastName());
 	    employeeResponseDTO.setEmployeeJoiningDate(employeeEntity.getEmployeeJoiningDate());
 	    employeeResponseDTO.setEmployeeSalary(employeeEntity.getEmployeeSalary());
-		employeeResponseDTO.setEmployeeEmail(employeeEntity.getEmployeeEmail());
-		employeeResponseDTO.setEmployeeContactNumber(employeeEntity.getEmployeeContactNumber());
-		employeeResponseDTO.setEmployeeDesignation(employeeEntity.getEmployeeDesignation());
+		employeeResponseDTO.setEmail(employeeEntity.getEmail());
+		employeeResponseDTO.setContactNumber(employeeEntity.getContactNumber());
+		employeeResponseDTO.setDesignation(employeeEntity.getDesignation());
+		//employeeResponseDTO.setEmployeeUniqueCode(employeeEntity.getEmployeeUniqueCode());
 	    return employeeResponseDTO;
 	}
 }

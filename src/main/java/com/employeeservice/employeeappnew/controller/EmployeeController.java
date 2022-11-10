@@ -2,6 +2,7 @@ package com.employeeservice.employeeappnew.controller;
 
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
+import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,15 @@ public class EmployeeController {
     @GetMapping
     public ServiceResponse<List<EmployeeResponseDTO>> getAllEmployees() {
         ServiceResponse<List<EmployeeResponseDTO>> employeeServiceResponse = new ServiceResponse<>();
+        List<EmployeeResponseDTO> employeeResponseDTOS = null;
         try {
-            List<EmployeeResponseDTO> employeeResponseDTOS = employeeService.viewAllOnboardEmployees();
+            employeeResponseDTOS = employeeService.viewAllOnboardEmployees();
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(employeeResponseDTOS);
         } catch (Exception exception) {
             employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return employeeServiceResponse;
+        return new ServiceResponse<>(HttpStatus.NO_CONTENT, employeeResponseDTOS);
     }
 
     @GetMapping("/search/path/{employeeId}")
@@ -51,10 +53,10 @@ public class EmployeeController {
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(responseDTO);
+            return employeeServiceResponse;
         } catch (Exception exception) {
-            employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
-        return employeeServiceResponse;
     }
 
     @GetMapping("/search/request")
@@ -64,10 +66,10 @@ public class EmployeeController {
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(responseDTO);
+            return employeeServiceResponse;
         } catch (Exception exception) {
-            employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+           throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
-        return employeeServiceResponse;
     }
 
     @DeleteMapping("{employeeId}")
@@ -77,11 +79,12 @@ public class EmployeeController {
             EmployeeResponseDTO employeeResponseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
             employeeService.deleteEmployee(employeeId);
-            return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId + employeeResponseDTO +" record deleted successfully");
+            return new ServiceResponse<>(HttpStatus.ACCEPTED," EmployeeId => "+ employeeId + employeeResponseDTO +" record deleted successfully");
         } catch (Exception exception) {
-            employeeServiceResponse.setHttpStatus(HttpStatus.NOT_FOUND);
+           // employeeServiceResponse.setHttpStatus(HttpStatus.NOT_FOUND);
+            return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
         }
-        return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" record deleted successfully");
+        //return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
     }
 
     @PutMapping("{employeeId}")

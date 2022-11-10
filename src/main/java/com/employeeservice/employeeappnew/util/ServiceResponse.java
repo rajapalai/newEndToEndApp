@@ -16,4 +16,10 @@ public class ServiceResponse<T> {
     private HttpStatus httpStatus;
     private T responsePayload;
 
+    private List<ErrorDetails> errorDetails;
+
+    public ServiceResponse(HttpStatus httpStatus, T responsePayload) {
+        this.httpStatus = httpStatus;
+        this.responsePayload = responsePayload;
+    }
 }

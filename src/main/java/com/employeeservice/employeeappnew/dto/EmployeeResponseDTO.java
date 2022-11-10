@@ -19,8 +19,7 @@ public class EmployeeResponseDTO {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
 	private Date employeeJoiningDate;
 	private double employeeSalary;
-	private String employeeEmail;
-	private String employeeContactNumber;
-	private String employeeDesignation;
-	private String employeeUniqueCode;
+	private String email;
+	private String contactNumber;
+	private String designation;
 }
