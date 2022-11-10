@@ -43,7 +43,7 @@ public class EmployeeController {
         } catch (Exception exception) {
             employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ServiceResponse<>(HttpStatus.NO_CONTENT, employeeResponseDTOS);
+        return new ServiceResponse<>(HttpStatus.OK, employeeResponseDTOS);
     }
 
     @GetMapping("/search/path/{employeeId}")
