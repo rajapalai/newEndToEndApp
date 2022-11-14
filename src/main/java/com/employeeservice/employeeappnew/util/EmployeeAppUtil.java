@@ -12,7 +12,7 @@ public class EmployeeAppUtil {
 	    EmployeeEntity employeeEntity = new EmployeeEntity();
 	    employeeEntity.setEmployeeFirstName(employeeRequestDTO.getEmployeeFirstName());
 	    employeeEntity.setEmployeeLastName(employeeRequestDTO.getEmployeeLastName());
-	    employeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
+	   // employeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
 	    employeeEntity.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
 		employeeEntity.setEmail(employeeRequestDTO.getEmail());
 		employeeEntity.setContactNumber(employeeRequestDTO.getContactNumber());
@@ -24,10 +24,10 @@ public class EmployeeAppUtil {
 
 	public static EmployeeResponseDTO mapEmployeeEntityToEmployeeDTO(EmployeeEntity employeeEntity){
 	    EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO();
-	    employeeResponseDTO.setEmployeeId(employeeEntity.getEmployeeId());
+	    employeeResponseDTO.setId(employeeEntity.getId());
 	    employeeResponseDTO.setEmployeeFirstName(employeeEntity.getEmployeeFirstName());
 	    employeeResponseDTO.setEmployeeLastName(employeeEntity.getEmployeeLastName());
-	    employeeResponseDTO.setEmployeeJoiningDate(employeeEntity.getEmployeeJoiningDate());
+	    //employeeResponseDTO.setEmployeeJoiningDate(employeeEntity.getEmployeeJoiningDate());
 	    employeeResponseDTO.setEmployeeSalary(employeeEntity.getEmployeeSalary());
 		employeeResponseDTO.setEmail(employeeEntity.getEmail());
 		employeeResponseDTO.setContactNumber(employeeEntity.getContactNumber());

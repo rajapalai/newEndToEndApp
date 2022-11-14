@@ -30,9 +30,9 @@ public class EmployeeService implements EmployeeServiceInterface{
 
 		//Convert DTO -> Entity
 		EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
-		EmployeeEntity addEmployee = null;
+//		EmployeeEntity addEmployee = null;
 		try {
-			addEmployee = employeeDao.save(employeeEntity);
+			EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
 			EmployeeResponseDTO employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
 			//employeeResponseDTO.setEmployeeUniqueCode(UUID.randomUUID().toString().split("-")[0]);
 			return employeeResponseDTO;
@@ -89,7 +89,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 			//Modified the existing object with the new value
 			existingEmployeeEntity.setEmployeeFirstName(employeeRequestDTO.getEmployeeFirstName());
 			existingEmployeeEntity.setEmployeeLastName(employeeRequestDTO.getEmployeeLastName());
-			existingEmployeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
+			//existingEmployeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
 			existingEmployeeEntity.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
 			existingEmployeeEntity.setEmail(employeeRequestDTO.getEmail());
 			existingEmployeeEntity.setContactNumber(employeeRequestDTO.getContactNumber());

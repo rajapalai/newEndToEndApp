@@ -13,13 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeResponseDTO {
 
-	private Integer employeeId;
+	private Integer id;
 	private String employeeFirstName;
 	private String employeeLastName;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
-	private Date employeeJoiningDate;
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+//	private Date employeeJoiningDate;
 	private double employeeSalary;
 	private String email;
 	private String contactNumber;
 	private String designation;
+
 }

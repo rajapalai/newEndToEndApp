@@ -23,8 +23,8 @@ public class EmployeeRequestDTO {
 	private String employeeLastName;
 
 //	@PastOrPresent(message = "Joining date cant not be before date from current")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
-	private Date employeeJoiningDate;
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+//	private Date employeeJoiningDate;
 
 	@Min(value = 20000, message = "Employee salary can not be less than 20000")
 	@Max(value = 300000, message = "Employee salary can not be more than 300000")

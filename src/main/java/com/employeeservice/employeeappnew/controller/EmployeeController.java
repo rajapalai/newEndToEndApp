@@ -94,9 +94,10 @@ public class EmployeeController {
             EmployeeResponseDTO employeeResponseDTO = employeeService.updateEmployeeByEmployeeId(employeeId,employeeRequestDTO);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(employeeResponseDTO);
+            return employeeServiceResponse;
         } catch (Exception exception) {
             employeeServiceResponse.setHttpStatus(HttpStatus.NOT_MODIFIED);
+            throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
-        return employeeServiceResponse;
     }
 }

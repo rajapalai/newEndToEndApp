@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 public class EmployeeEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer employeeId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	@Column(unique = true)
 	private String employeeFirstName;
@@ -32,8 +32,8 @@ public class EmployeeEntity {
 	@Column(unique = true)
 	private String employeeLastName;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
-	private Date employeeJoiningDate;
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+//	private Date employeeJoiningDate;
 
 	private double employeeSalary;
 
