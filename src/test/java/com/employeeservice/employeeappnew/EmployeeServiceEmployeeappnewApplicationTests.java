@@ -2,6 +2,7 @@ package com.employeeservice.employeeappnew;
 
 import com.employeeservice.employeeappnew.controller.EmployeeController;
 import com.employeeservice.employeeappnew.dao.EmployeeDao;
+import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
@@ -32,7 +33,7 @@ class EmployeeServiceEmployeeappnewApplicationTests {
     @Autowired
     private EmployeeController employeeController;
 
-    @Mock
+    @MockBean
     private EmployeeService employeeService;
 
     @Mock
@@ -53,6 +54,7 @@ class EmployeeServiceEmployeeappnewApplicationTests {
        // EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
 //        employeeServiceResponse.setResponsePayload(employeeResponseDTO);
 //        employeeServiceResponse.setHttpStatus(HttpStatus.CREATED);
+        Mockito.when(employeeService.onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class))).thenReturn(EmployeeBuilder.getResponse());
         Mockito.when(employeeDao.save(ArgumentMatchers.any(EmployeeEntity.class))).thenReturn(EmployeeBuilder.getEntity());
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/employee-service")
@@ -61,23 +63,26 @@ class EmployeeServiceEmployeeappnewApplicationTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").exists());
-        Mockito.verify(employeeDao, Mockito.times(1)).save(ArgumentMatchers.any(EmployeeEntity.class));
-        Mockito.verifyNoMoreInteractions(employeeDao);
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
+        Mockito.verify(employeeService, Mockito.times(1)).onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class));
+        Mockito.verifyNoMoreInteractions(employeeService);
+//        Mockito.verify(employeeDao,Mockito.times(1)).save(ArgumentMatchers.any(EmployeeEntity.class));
+//        Mockito.verifyNoMoreInteractions(employeeDao);
     }
 
     @Test
     public void getById() throws Exception {
         //EmployeeResponseDTO employeeResponseDTO1 =  new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
+        Mockito.when(employeeService.findEmployeeByID(10)).thenReturn(EmployeeBuilder.getResponse());
         Mockito.when(employeeDao.findById(10)).thenReturn(Optional.of(EmployeeBuilder.getEntity()));
                 mockMvc.perform(MockMvcRequestBuilders
                         .get("/employee-service/search/path/"+10)
                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(print())
                         .andExpect(status().isOk())
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").exists());
-        Mockito.verify(employeeDao, Mockito.times(1)).findById(10);
-        Mockito.verifyNoMoreInteractions(employeeDao);
+                        .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
+        Mockito.verify(employeeService, Mockito.times(1)).findEmployeeByID(10);
+        Mockito.verifyNoMoreInteractions(employeeService);
     }
 
     private String convertObjectAsString(Object object) {
