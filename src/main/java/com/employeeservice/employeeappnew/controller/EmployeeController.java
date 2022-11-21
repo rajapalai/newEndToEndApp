@@ -5,6 +5,8 @@ import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/employee-service")
 public class EmployeeController {
 
+    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     @Autowired
     private EmployeeService employeeService;
 
@@ -26,8 +29,10 @@ public class EmployeeController {
             EmployeeResponseDTO newEmployee = employeeService.onboardNewEmployee(employeeRequestDTO);
             employeeServiceResponse.setHttpStatus(HttpStatus.CREATED);
             employeeServiceResponse.setResponsePayload(newEmployee);
+            logger.info("user created: {}", employeeServiceResponse);
         } catch (Exception exception){
             employeeServiceResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
+            logger.error("user not created : {}",employeeServiceResponse);
         }
         return employeeServiceResponse;
     }
@@ -40,7 +45,9 @@ public class EmployeeController {
             employeeResponseDTOS = employeeService.viewAllOnboardEmployees();
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(employeeResponseDTOS);
+            logger.info("list of created users: {}", employeeServiceResponse);
         } catch (Exception exception) {
+            logger.error("users not found : {}",employeeServiceResponse);
             employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ServiceResponse<>(HttpStatus.OK, employeeResponseDTOS);
@@ -53,8 +60,10 @@ public class EmployeeController {
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(responseDTO);
+            logger.info("user found: {}",employeeServiceResponse);
             return employeeServiceResponse;
         } catch (Exception exception) {
+            logger.error("user not found : {}",employeeId,employeeServiceResponse);
             throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
     }
