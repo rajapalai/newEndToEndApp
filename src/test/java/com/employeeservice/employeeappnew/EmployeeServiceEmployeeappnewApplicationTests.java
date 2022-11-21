@@ -33,7 +33,7 @@ class EmployeeServiceEmployeeappnewApplicationTests {
     @Autowired
     private EmployeeController employeeController;
 
-    @MockBean
+    @Mock
     private EmployeeService employeeService;
 
     @Mock
@@ -64,10 +64,10 @@ class EmployeeServiceEmployeeappnewApplicationTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
-        Mockito.verify(employeeService, Mockito.times(1)).onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class));
-        Mockito.verifyNoMoreInteractions(employeeService);
-//        Mockito.verify(employeeDao,Mockito.times(1)).save(ArgumentMatchers.any(EmployeeEntity.class));
-//        Mockito.verifyNoMoreInteractions(employeeDao);
+//        Mockito.verify(employeeService, Mockito.times(1)).onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class));
+//        Mockito.verifyNoMoreInteractions(employeeService);
+        Mockito.verify(employeeDao,Mockito.times(1)).save(ArgumentMatchers.any(EmployeeEntity.class));
+        Mockito.verifyNoMoreInteractions(employeeDao);
     }
 
     @Test
@@ -81,8 +81,8 @@ class EmployeeServiceEmployeeappnewApplicationTests {
                         .andDo(print())
                         .andExpect(status().isOk())
                         .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
-        Mockito.verify(employeeService, Mockito.times(1)).findEmployeeByID(10);
-        Mockito.verifyNoMoreInteractions(employeeService);
+        Mockito.verify(employeeDao, Mockito.times(1)).findById(10);
+        Mockito.verifyNoMoreInteractions(employeeDao);
     }
 
     private String convertObjectAsString(Object object) {
