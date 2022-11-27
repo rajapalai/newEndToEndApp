@@ -1,14 +1,17 @@
 package com.employeeservice.employeeappnew;
 
 import com.employeeservice.employeeappnew.controller.EmployeeController;
+import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.dao.EmployeeDao;
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
-import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-class EmployeeServiceEmployeeappnewApplicationTests {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class E2ETests {
 
     @Autowired
     private EmployeeController employeeController;
@@ -49,6 +53,7 @@ class EmployeeServiceEmployeeappnewApplicationTests {
     }
 
     @Test
+    @Order(1)
     public void addEmployeeOnboardDataTest() throws Exception {
 //        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
        // EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
@@ -71,6 +76,7 @@ class EmployeeServiceEmployeeappnewApplicationTests {
     }
 
     @Test
+    @Order(2)
     public void getById() throws Exception {
         //EmployeeResponseDTO employeeResponseDTO1 =  new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
         Mockito.when(employeeService.findEmployeeByID(10)).thenReturn(EmployeeBuilder.getResponse());

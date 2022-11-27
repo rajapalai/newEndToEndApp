@@ -58,12 +58,12 @@ public class EmployeeController {
         ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
         try{
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
-            employeeServiceResponse.setHttpStatus(HttpStatus.OK);
+            employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
             employeeServiceResponse.setResponsePayload(responseDTO);
             logger.info("user found: {}",employeeServiceResponse);
             return employeeServiceResponse;
         } catch (Exception exception) {
-            logger.error("user not found : {}",employeeId,employeeServiceResponse);
+            logger.error("user not found : {}",employeeId);
             throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
     }
@@ -75,8 +75,10 @@ public class EmployeeController {
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(responseDTO);
+            logger.info("user found: {}",employeeServiceResponse);
             return employeeServiceResponse;
         } catch (Exception exception) {
+            logger.error("user not found : {}",employeeId);
            throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
     }
@@ -88,9 +90,11 @@ public class EmployeeController {
             EmployeeResponseDTO employeeResponseDTO = employeeService.findEmployeeByID(employeeId);
             employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
             employeeService.deleteEmployee(employeeId);
+            logger.info("user deleted successfully: {}",employeeServiceResponse);
             return new ServiceResponse<>(HttpStatus.ACCEPTED," EmployeeId => "+ employeeId + employeeResponseDTO +" record deleted successfully");
         } catch (Exception exception) {
            // employeeServiceResponse.setHttpStatus(HttpStatus.NOT_FOUND);
+            logger.error("this is a invalid id to delete : {}",employeeId);
             return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
         }
         //return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
@@ -103,9 +107,11 @@ public class EmployeeController {
             EmployeeResponseDTO employeeResponseDTO = employeeService.updateEmployeeByEmployeeId(employeeId,employeeRequestDTO);
             employeeServiceResponse.setHttpStatus(HttpStatus.OK);
             employeeServiceResponse.setResponsePayload(employeeResponseDTO);
+            logger.info("user update successfully: {}",employeeServiceResponse);
             return employeeServiceResponse;
         } catch (Exception exception) {
             employeeServiceResponse.setHttpStatus(HttpStatus.NOT_MODIFIED);
+            logger.error("this is a invalid id to update : {}",employeeId);
             throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
     }

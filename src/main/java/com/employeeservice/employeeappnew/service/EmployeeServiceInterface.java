@@ -2,7 +2,6 @@ package com.employeeservice.employeeappnew.service;
 
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
-import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 
 import java.util.List;
 
