@@ -29,4 +29,232 @@
 ""2022-11-27 13:51:01 [http-nio-9090-exec-3] INFO  o.h.e.j.b.internal.AbstractBatchImpl - HHH000010: On release of batch it still contained JDBC statements
 ""2022-11-27 13:51:01 [http-nio-9090-exec-3] ERROR c.e.e.controller.EmployeeController - user not created : ServiceResponse(httpStatus=400 BAD_REQUEST, responsePayload=null, errorDetails=null)
 ""2022-11-27 13:51:07 [http-nio-9090-exec-4] INFO  c.e.e.controller.EmployeeController - user created: ServiceResponse(httpStatus=201 CREATED, responsePayload=EmployeeResponseDTO(id=20, employeeFirstName=Sukumar, employeeLastName=Suka, employeeSalary=50000.0, email=suku@gmail.com, contactNumber=5793196378, designation=SR.CONSULTANT), errorDetails=null)
+""2022-11-27 16:48:39 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Starting EmployeeServiceEmployeeappnewApplication using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 11896 (E:\Microservices projects\2022 projects\newEndToEndApp\target\classes started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:48:39 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:48:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+""2022-11-27 16:48:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+""2022-11-27 16:48:40 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:48:40 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:48:41 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9090 (http)
+""2022-11-27 16:48:41 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2022-11-27 16:48:41 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2022-11-27 16:48:41 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+""2022-11-27 16:48:41 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2098 ms
+""2022-11-27 16:48:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2022-11-27 16:48:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2022-11-27 16:48:42 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/newdb'
+""2022-11-27 16:48:42 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:48:42 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+""2022-11-27 16:48:42 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2022-11-27 16:48:42 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:48:43 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:48:43 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:48:43 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:48:44 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2022-11-27 16:48:44 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9090 (http) with context path ''
+""2022-11-27 16:48:44 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Started EmployeeServiceEmployeeappnewApplication in 5.779 seconds (JVM running for 6.404)
+""2022-11-27 16:48:52 [http-nio-9090-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+""2022-11-27 16:48:52 [http-nio-9090-exec-1] INFO  c.e.e.controller.EmployeeController - list of created users: ServiceResponse(httpStatus=200 OK, responsePayload=[EmployeeResponseDTO(id=1, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=50000.0, email=amar@gmail.com, contactNumber=9776828659, designation=SR.CONSULTANT), EmployeeResponseDTO(id=4, employeeFirstName=Manoj, employeeLastName=Kumar, employeeSalary=40000.0, email=manoj@gmail.com, contactNumber=8249434498, designation=SR.CONSULTANT)], errorDetails=null)
+""2022-11-27 16:49:35 [http-nio-9090-exec-2] INFO  c.e.e.controller.EmployeeController - user created: ServiceResponse(httpStatus=201 CREATED, responsePayload=EmployeeResponseDTO(id=5, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=40000.0, email=liza@gmail.com, contactNumber=2793487964, designation=SR.CONSULTANT), errorDetails=null)
+""2022-11-27 16:49:37 [http-nio-9090-exec-3] INFO  c.e.e.controller.EmployeeController - list of created users: ServiceResponse(httpStatus=200 OK, responsePayload=[EmployeeResponseDTO(id=1, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=50000.0, email=amar@gmail.com, contactNumber=9776828659, designation=SR.CONSULTANT), EmployeeResponseDTO(id=4, employeeFirstName=Manoj, employeeLastName=Kumar, employeeSalary=40000.0, email=manoj@gmail.com, contactNumber=8249434498, designation=SR.CONSULTANT), EmployeeResponseDTO(id=5, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=40000.0, email=liza@gmail.com, contactNumber=2793487964, designation=SR.CONSULTANT)], errorDetails=null)
+""2022-11-27 16:49:55 [http-nio-9090-exec-4] ERROR c.e.e.controller.EmployeeController - this is a invalid id to update : 6
+""2022-11-27 16:50:15 [http-nio-9090-exec-6] INFO  c.e.e.controller.EmployeeController - user update successfully: ServiceResponse(httpStatus=200 OK, responsePayload=EmployeeResponseDTO(id=4, employeeFirstName=Manoj, employeeLastName=kumar, employeeSalary=40000.0, email=manoj.barisal@gmail.com, contactNumber=8249434498, designation=TESTER), errorDetails=null)
+""2022-11-27 16:50:29 [http-nio-9090-exec-7] INFO  c.e.e.controller.EmployeeController - user found: ServiceResponse(httpStatus=200 OK, responsePayload=EmployeeResponseDTO(id=1, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=50000.0, email=amar@gmail.com, contactNumber=9776828659, designation=SR.CONSULTANT), errorDetails=null)
+""2022-11-27 16:50:31 [http-nio-9090-exec-8] INFO  c.e.e.controller.EmployeeController - user found: ServiceResponse(httpStatus=302 FOUND, responsePayload=EmployeeResponseDTO(id=1, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=50000.0, email=amar@gmail.com, contactNumber=9776828659, designation=SR.CONSULTANT), errorDetails=null)
+""2022-11-27 16:50:46 [http-nio-9090-exec-5] INFO  c.e.e.controller.EmployeeController - list of created users: ServiceResponse(httpStatus=200 OK, responsePayload=[EmployeeResponseDTO(id=1, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=50000.0, email=amar@gmail.com, contactNumber=9776828659, designation=SR.CONSULTANT), EmployeeResponseDTO(id=4, employeeFirstName=Manoj, employeeLastName=kumar, employeeSalary=40000.0, email=manoj.barisal@gmail.com, contactNumber=8249434498, designation=TESTER), EmployeeResponseDTO(id=5, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=40000.0, email=liza@gmail.com, contactNumber=2793487964, designation=SR.CONSULTANT)], errorDetails=null)
+""2022-11-27 16:50:49 [http-nio-9090-exec-9] INFO  c.e.e.controller.EmployeeController - user deleted successfully: ServiceResponse(httpStatus=302 FOUND, responsePayload=null, errorDetails=null)
+""2022-11-27 16:51:07 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 17 class path changes (0 additions, 16 deletions, 1 modification)
+""2022-11-27 16:51:07 [Thread-5] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2022-11-27 16:51:07 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+""2022-11-27 16:51:07 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:07 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2022-11-27 16:51:07 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2022-11-27 16:51:08 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Starting EmployeeServiceEmployeeappnewApplication using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 11896 (E:\Microservices projects\2022 projects\newEndToEndApp\target\classes started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:51:08 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9090 (http)
+""2022-11-27 16:51:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2022-11-27 16:51:08 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2022-11-27 16:51:08 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 590 ms
+""2022-11-27 16:51:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+""2022-11-27 16:51:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/newdb'
+""2022-11-27 16:51:08 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:51:08 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:51:08 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:51:08 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:08 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:51:09 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2022-11-27 16:51:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9090 (http) with context path ''
+""2022-11-27 16:51:09 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Started EmployeeServiceEmployeeappnewApplication in 1.598 seconds (JVM running for 151.104)
+""2022-11-27 16:51:09 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2022-11-27 16:51:12 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 16 class path changes (16 additions, 0 deletions, 0 modifications)
+""2022-11-27 16:51:12 [Thread-7] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2022-11-27 16:51:12 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:12 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+""2022-11-27 16:51:12 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+""2022-11-27 16:51:12 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Starting EmployeeServiceEmployeeappnewApplication using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 11896 (E:\Microservices projects\2022 projects\newEndToEndApp\target\classes started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:51:12 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9090 (http)
+""2022-11-27 16:51:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2022-11-27 16:51:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2022-11-27 16:51:12 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 393 ms
+""2022-11-27 16:51:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+""2022-11-27 16:51:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/newdb'
+""2022-11-27 16:51:12 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:51:12 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:51:12 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:51:12 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:12 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:51:13 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2022-11-27 16:51:13 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9090 (http) with context path ''
+""2022-11-27 16:51:13 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Started EmployeeServiceEmployeeappnewApplication in 1.33 seconds (JVM running for 154.926)
+""2022-11-27 16:51:13 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2022-11-27 16:51:19 [main] INFO  c.e.employeeappnew.UnitTests - Starting UnitTests using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 17232 (started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:51:19 [main] INFO  c.e.employeeappnew.UnitTests - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:51:20 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:51:20 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:51:21 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:51:22 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+""2022-11-27 16:51:22 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2022-11-27 16:51:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2022-11-27 16:51:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2022-11-27 16:51:23 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:51:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:51:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:24 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.employeeappnew.UnitTests - Started UnitTests in 8.47 seconds (JVM running for 10.12)
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.e.controller.EmployeeController - user created: ServiceResponse(httpStatus=201 CREATED, responsePayload=EmployeeResponseDTO(id=1, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=smaranika@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.e.controller.EmployeeController - list of created users: ServiceResponse(httpStatus=200 OK, responsePayload=[EmployeeResponseDTO(id=1, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=smaranika@gmail.com, contactNumber=5789654789, designation=DEVOPS), EmployeeResponseDTO(id=2, employeeFirstName=Amarjeet, employeeLastName=Palai, employeeSalary=60000.0, email=amar@gmail.com, contactNumber=7854968753, designation=DEVOPS), EmployeeResponseDTO(id=3, employeeFirstName=Liza, employeeLastName=Sen, employeeSalary=40000.0, email=liza@gmail.com, contactNumber=2678945321, designation=DEVOPS)], errorDetails=null)
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.e.controller.EmployeeController - user found: ServiceResponse(httpStatus=302 FOUND, responsePayload=EmployeeResponseDTO(id=1, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=smaranika@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.e.controller.EmployeeController - user update successfully: ServiceResponse(httpStatus=200 OK, responsePayload=EmployeeResponseDTO(id=1, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=smaranika@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:51:27 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:27 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+""2022-11-27 16:51:27 [main] INFO  c.e.e.controller.EmployeeController - user deleted successfully: ServiceResponse(httpStatus=302 FOUND, responsePayload=null, errorDetails=null)
+""2022-11-27 16:51:27 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2022-11-27 16:51:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2022-11-27 16:51:47 [main] INFO  c.e.employeeappnew.E2ETests - Starting E2ETests using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 3728 (started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:51:47 [main] INFO  c.e.employeeappnew.E2ETests - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:51:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:51:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:51:49 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:51:49 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+""2022-11-27 16:51:49 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2022-11-27 16:51:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2022-11-27 16:51:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2022-11-27 16:51:50 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:51:50 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:51:50 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:51 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:51:52 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:51:52 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:51:52 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+""2022-11-27 16:51:52 [main] INFO  c.e.employeeappnew.E2ETests - Started E2ETests in 5.363 seconds (JVM running for 6.66)
+""2022-11-27 16:51:53 [main] INFO  c.e.e.controller.EmployeeController - user created: ServiceResponse(httpStatus=201 CREATED, responsePayload=EmployeeResponseDTO(id=10, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=liza@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:51:53 [main] INFO  c.e.e.controller.EmployeeController - user found: ServiceResponse(httpStatus=302 FOUND, responsePayload=EmployeeResponseDTO(id=10, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=liza@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:51:53 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:51:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2022-11-27 16:51:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2022-11-27 16:52:37 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 17 class path changes (0 additions, 16 deletions, 1 modification)
+""2022-11-27 16:52:37 [Thread-11] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2022-11-27 16:52:37 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:37 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+""2022-11-27 16:52:37 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+""2022-11-27 16:52:37 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Starting EmployeeServiceEmployeeappnewApplication using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 11896 (E:\Microservices projects\2022 projects\newEndToEndApp\target\classes started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:52:37 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9090 (http)
+""2022-11-27 16:52:38 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2022-11-27 16:52:38 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2022-11-27 16:52:38 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1121 ms
+""2022-11-27 16:52:38 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+""2022-11-27 16:52:38 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/newdb'
+""2022-11-27 16:52:38 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:52:38 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:52:38 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:52:38 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:39 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:52:40 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2022-11-27 16:52:40 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9090 (http) with context path ''
+""2022-11-27 16:52:40 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Started EmployeeServiceEmployeeappnewApplication in 2.952 seconds (JVM running for 241.984)
+""2022-11-27 16:52:40 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2022-11-27 16:52:41 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 16 class path changes (16 additions, 0 deletions, 0 modifications)
+""2022-11-27 16:52:41 [Thread-15] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2022-11-27 16:52:41 [Thread-15] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:41 [Thread-15] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+""2022-11-27 16:52:41 [Thread-15] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+""2022-11-27 16:52:42 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Starting EmployeeServiceEmployeeappnewApplication using Java 19.0.1 on LAPTOP-S7I1GPA2 with PID 11896 (E:\Microservices projects\2022 projects\newEndToEndApp\target\classes started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:52:42 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9090 (http)
+""2022-11-27 16:52:42 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2022-11-27 16:52:42 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2022-11-27 16:52:42 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 411 ms
+""2022-11-27 16:52:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+""2022-11-27 16:52:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/newdb'
+""2022-11-27 16:52:42 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:52:42 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:52:42 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:52:42 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:42 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:52:43 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2022-11-27 16:52:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9090 (http) with context path ''
+""2022-11-27 16:52:43 [restartedMain] INFO  c.e.e.EmployeeServiceEmployeeappnewApplication - Started EmployeeServiceEmployeeappnewApplication in 1.228 seconds (JVM running for 244.778)
+""2022-11-27 16:52:43 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2022-11-27 16:52:44 [main] INFO  c.e.employeeappnew.E2ETests - Starting E2ETests using Java 11.0.12 on LAPTOP-S7I1GPA2 with PID 13584 (started by RAJA PALAI in E:\Microservices projects\2022 projects\newEndToEndApp)
+""2022-11-27 16:52:44 [main] INFO  c.e.employeeappnew.E2ETests - No active profile set, falling back to 1 default profile: "default"
+""2022-11-27 16:52:46 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2022-11-27 16:52:46 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 1 JPA repository interfaces.
+""2022-11-27 16:52:47 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2022-11-27 16:52:47 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+""2022-11-27 16:52:47 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2022-11-27 16:52:47 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2022-11-27 16:52:48 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2022-11-27 16:52:48 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+""2022-11-27 16:52:48 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2022-11-27 16:52:48 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:49 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2022-11-27 16:52:51 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+""2022-11-27 16:52:51 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+""2022-11-27 16:52:51 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+""2022-11-27 16:52:51 [main] INFO  c.e.employeeappnew.E2ETests - Started E2ETests in 6.744 seconds (JVM running for 7.924)
+""2022-11-27 16:52:51 [main] INFO  c.e.e.controller.EmployeeController - user created: ServiceResponse(httpStatus=201 CREATED, responsePayload=EmployeeResponseDTO(id=10, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=liza@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:52:51 [main] INFO  c.e.e.controller.EmployeeController - user found: ServiceResponse(httpStatus=302 FOUND, responsePayload=EmployeeResponseDTO(id=10, employeeFirstName=Smaranika, employeeLastName=Pattanayak, employeeSalary=50000.0, email=liza@gmail.com, contactNumber=5789654789, designation=DEVOPS), errorDetails=null)
+""2022-11-27 16:52:51 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:52:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2022-11-27 16:52:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2022-11-27 16:53:53 [http-nio-9090-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+""2022-11-27 16:53:54 [http-nio-9090-exec-3] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 350 ms
+""2022-11-27 16:59:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2022-11-27 16:59:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+""2022-11-27 16:59:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
 "
