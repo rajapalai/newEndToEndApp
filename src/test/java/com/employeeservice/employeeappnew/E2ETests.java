@@ -8,10 +8,8 @@ import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.Before;
+import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,38 +32,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class E2ETests {
 
-    @Autowired
+    @InjectMocks
     private EmployeeController employeeController;
 
     @Mock
     private EmployeeService employeeService;
 
-    @Mock
-    private EmployeeAppUtil employeeAppUtil;
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private EmployeeDao employeeDao;
 
+    @Before
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(EmployeeController.class).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
     }
 
     @Test
     @Order(1)
     public void addEmployeeOnboardDataTest() throws Exception {
-//        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
-       // EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
-//        employeeServiceResponse.setResponsePayload(employeeResponseDTO);
-//        employeeServiceResponse.setHttpStatus(HttpStatus.CREATED);
-        Mockito.when(employeeService.onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class))).thenReturn(EmployeeBuilder.getResponse());
-        Mockito.when(employeeDao.save(ArgumentMatchers.any(EmployeeEntity.class))).thenReturn(EmployeeBuilder.getEntity());
+
+        Mockito.when(employeeService.onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class))).thenReturn(EmployeeBuilder.employeeResponseDTO());
+        Mockito.when(employeeDao.save(ArgumentMatchers.any(EmployeeEntity.class))).thenReturn(EmployeeBuilder.employeeEntity());
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/employee-service")
-                .content(convertObjectAsString(EmployeeBuilder.getResponse()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+                        .post("/employee-service")
+                        .content(convertObjectAsString(EmployeeBuilder.employeeRequestDTO()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
@@ -79,14 +73,14 @@ class E2ETests {
     @Order(2)
     public void getById() throws Exception {
         //EmployeeResponseDTO employeeResponseDTO1 =  new EmployeeResponseDTO(10,"Smaranika","Pattanyak",50000,"liza@gmail.com","9854789632","DEVOPS");
-        Mockito.when(employeeService.findEmployeeByID(10)).thenReturn(EmployeeBuilder.getResponse());
-        Mockito.when(employeeDao.findById(10)).thenReturn(Optional.of(EmployeeBuilder.getEntity()));
-                mockMvc.perform(MockMvcRequestBuilders
+        Mockito.when(employeeService.findEmployeeByID(10)).thenReturn(EmployeeBuilder.employeeResponseDTO());
+        Mockito.when(employeeDao.findById(10)).thenReturn(Optional.of(EmployeeBuilder.employeeEntity()));
+        mockMvc.perform(MockMvcRequestBuilders
                         .get("/employee-service/search/path/"+10)
                         .accept(MediaType.APPLICATION_JSON))
-                        .andDo(print())
-                        .andExpect(status().isOk())
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[*].id").value(10));
         Mockito.verify(employeeDao, Mockito.times(1)).findById(10);
         Mockito.verifyNoMoreInteractions(employeeDao);
     }

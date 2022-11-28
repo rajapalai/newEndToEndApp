@@ -48,24 +48,26 @@ public class UnitTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    private List<EmployeeResponseDTO> employeesDTO;
+    private List<EmployeeResponseDTO> employeeResponseDTOList;
 
     private EmployeeRequestDTO employeeRequestDTO;
 
-    @Before
-    public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
+    private EmployeeResponseDTO employeeResponseDTO;
+
+//    @Before
+//    public void setup() {
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+//    }
 
     @Test
     @Order(1)
     public void test_viewAllOnboardEmployees() throws Exception {
-        employeesDTO = new ArrayList<EmployeeResponseDTO>();
-        employeesDTO.add(new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS"));
-        employeesDTO.add(new EmployeeResponseDTO(2,"Amarjeet","Palai",60000,"amar@gmail.com","7854968753","DEVOPS"));
-        employeesDTO.add(new EmployeeResponseDTO(3,"Liza","Sen",40000,"liza@gmail.com","2678945321","DEVOPS"));
+        employeeResponseDTOList = new ArrayList<EmployeeResponseDTO>();
+        employeeResponseDTOList.add(new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS"));
+        employeeResponseDTOList.add(new EmployeeResponseDTO(2,"Amarjeet","Palai",60000,"amar@gmail.com","7854968753","DEVOPS"));
+        employeeResponseDTOList.add(new EmployeeResponseDTO(3,"Liza","Sen",40000,"liza@gmail.com","2678945321","DEVOPS"));
 
-        when(employeeService.viewAllOnboardEmployees()).thenReturn(employeesDTO);
+        when(employeeService.viewAllOnboardEmployees()).thenReturn(employeeResponseDTOList);
         ServiceResponse<List<EmployeeResponseDTO>> employeeServiceResponse = employeeController.getAllEmployees();
 
         assertEquals(HttpStatus.OK,employeeServiceResponse.getHttpStatus());
@@ -75,20 +77,20 @@ public class UnitTests {
     @Test
     @Order(2)
     public void test_onboardNewEmployee() throws Exception {
-        EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
-        EmployeeRequestDTO employeeRequestDTO = new EmployeeRequestDTO("Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeRequestDTO = new EmployeeRequestDTO("Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
 
-        when(employeeService.onboardNewEmployee(employeeRequestDTO)).thenReturn(employeeResponseDTO);
-        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = employeeController.addEmployeeOnboardData(employeeRequestDTO);
+        when(employeeService.onboardNewEmployee(EmployeeBuilder.employeeRequestDTO())).thenReturn(EmployeeBuilder.employeeResponseDTO());
+        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = employeeController.addEmployeeOnboardData(EmployeeBuilder.employeeRequestDTO());
 
         assertEquals(HttpStatus.CREATED,employeeServiceResponse.getHttpStatus());
-        assertEquals(employeeResponseDTO,employeeServiceResponse.getResponsePayload());
+        assertEquals(EmployeeBuilder.employeeResponseDTO(),employeeServiceResponse.getResponsePayload());
     }
 
     @Test
     @Order(3)
     public void test_findEmployeeByID() throws Exception {
-        EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
         Integer Id = 1;
 
         when(employeeService.findEmployeeByID(Id)).thenReturn(employeeResponseDTO);
@@ -101,9 +103,9 @@ public class UnitTests {
     @Test
     @Order(4)
     public void test_updateEmployeeByEmployeeId() throws Exception {
-        EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
         Integer Id = 1;
-        EmployeeRequestDTO employeeRequestDTO = new EmployeeRequestDTO("Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeRequestDTO = new EmployeeRequestDTO("Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
 
         when(employeeService.findEmployeeByID(Id)).thenReturn(employeeResponseDTO);
         when(employeeService.updateEmployeeByEmployeeId(Id,employeeRequestDTO)).thenReturn(employeeResponseDTO);
@@ -122,7 +124,7 @@ public class UnitTests {
     @Test
     @Order(5)
     public void test_deleteEmployee() throws Exception {
-        EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
+        employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
         Integer employeeId = 1;
 
         when(employeeService.findEmployeeByID(employeeId)).thenReturn(employeeResponseDTO);
