@@ -4,6 +4,7 @@ import com.employeeservice.employeeappnew.customAnnotation.EmployeeDesignationTy
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
@@ -11,6 +12,7 @@ import javax.validation.constraints.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class EmployeeRequestDTO {
 
 	@NotBlank(message = "Employee firstname should not be NULL or EMPTY")

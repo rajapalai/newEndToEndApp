@@ -61,10 +61,11 @@ public class EmployeeController {
         return new ServiceResponse<>(HttpStatus.OK, employeeResponseDTOS);
     }
 
+    //New Api
     //Builder Design Pattern
     @GetMapping("/designationTypes")
     public ResponseEntity<APIResponse> getEmployeesByDesignation() {
-        Map<String, List<EmployeeResponseDTO>> employees = employeeService.getEmployeeDesignationByTypes();
+        Map<String, List<EmployeeResponseDTO>> employees = employeeService.getAllEmployeeDesignationByTypes();
         APIResponse<Map<String, List<EmployeeResponseDTO>>> responseDTO = APIResponse
                 .<Map<String, List<EmployeeResponseDTO>>>builder()
                 .status(SUCCESS)
@@ -77,14 +78,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/search/path/{employeeId}")
-    public ServiceResponse<EmployeeResponseDTO> getEmployeeById(@PathVariable(value = "employeeId") Integer employeeId) {
-        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
+    public ResponseEntity<?> getEmployeeById(@PathVariable(value = "employeeId") Integer employeeId) {
+        log.info("EmployeeController::getEmployee by id  {} ", employeeId);
         try{
-            EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);
-            employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
-            employeeServiceResponse.setResponsePayload(responseDTO);
-            logger.info("user found: {}",employeeServiceResponse);
-            return employeeServiceResponse;
+            EmployeeResponseDTO employeeResponseDTO = employeeService.findEmployeeByID(employeeId);
+
+            APIResponse<EmployeeResponseDTO> responseDTO =APIResponse
+                    .<EmployeeResponseDTO>builder()
+                    .status(SUCCESS)
+                    .results(employeeResponseDTO)
+                    .build();
+            logger.info("EmployeeController::getEmployee by id  {} response {}", employeeId,EmployeeAppUtil
+                    .jsonAsString(employeeResponseDTO));
+            return new ResponseEntity<>(responseDTO,HttpStatus.OK);
         } catch (Exception exception) {
             logger.error("user not found : {}",employeeId);
             throw new ResourceNotFoundException("Employee","employeeID",employeeId);

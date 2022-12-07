@@ -7,6 +7,7 @@ import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.exception.EmployeeServiceBusinessException;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -43,6 +44,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 	}
 
 	@Override
+	@Cacheable(value = "employee")
 	public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
 
 		Iterable<EmployeeEntity> employeeEntities = null;
@@ -57,6 +59,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 	}
 
 	@Override
+	@Cacheable(value = "employee")
 	public EmployeeResponseDTO findEmployeeByID(Integer employeeId) {
 
 		EmployeeEntity employeeEntity = null;
@@ -70,6 +73,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 	}
 
 	@Override
+	@Cacheable(value = "employee")
 	public void deleteEmployee(Integer employeeId) {
 		try{
 			employeeDao.deleteById(employeeId);
@@ -80,6 +84,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 	}
 
 	@Override
+	@Cacheable(value = "employee")
 	public EmployeeResponseDTO updateEmployeeByEmployeeId(Integer employeeId, EmployeeRequestDTO employeeRequestDTO) {
 
 		//Get the existing object
@@ -103,10 +108,10 @@ public class EmployeeService implements EmployeeServiceInterface{
 		}
 	}
 
-	@Cacheable(value = "product")
-	public Map<String, List<EmployeeResponseDTO>> getEmployeeDesignationByTypes() {
+	@Cacheable(value = "employee")
+	public Map<String, List<EmployeeResponseDTO>> getAllEmployeeDesignationByTypes() {
 		try {
-			log.info("EmployeeService:getEmployeeDesignationByTypes execution started.");
+			log.info("EmployeeService:getAllEmployeeDesignationByTypes execution started.");
 
 			Map<String, List<EmployeeResponseDTO>> employeeDesignationMap =
 					employeeDao.findAll().stream()
@@ -114,7 +119,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 							.filter(employeeResponseDTO -> employeeResponseDTO.getDesignation() != null)
 							.collect(Collectors.groupingBy(EmployeeResponseDTO::getDesignation));
 
-			log.info("EmployeeService:getEmployeeDesignationByTypes execution ended.");
+			log.info("EmployeeService:getAllEmployeeDesignationByTypes execution ended.");
 			return employeeDesignationMap;
 
 		} catch (Exception ex) {
