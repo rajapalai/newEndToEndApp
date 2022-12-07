@@ -1,24 +1,32 @@
 package com.employeeservice.employeeappnew.controller;
 
+import com.employeeservice.employeeappnew.dto.APIResponse;
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.service.EmployeeService;
+import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee-service")
+@Slf4j
 public class EmployeeController {
 
     Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
+    public static final String SUCCESS = "Success";
     @Autowired
     private EmployeeService employeeService;
 
@@ -51,6 +59,21 @@ public class EmployeeController {
             employeeServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ServiceResponse<>(HttpStatus.OK, employeeResponseDTOS);
+    }
+
+    //Builder Design Pattern
+    @GetMapping("/designationTypes")
+    public ResponseEntity<APIResponse> getEmployeesByDesignation() {
+        Map<String, List<EmployeeResponseDTO>> employees = employeeService.getEmployeeDesignationByTypes();
+        APIResponse<Map<String, List<EmployeeResponseDTO>>> responseDTO = APIResponse
+                .<Map<String, List<EmployeeResponseDTO>>>builder()
+                .status(SUCCESS)
+                .results(employees)
+                .build();
+
+        log.info("ProductController::getProductsGroupByType by types  {}", EmployeeAppUtil.jsonAsString(responseDTO));
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @GetMapping("/search/path/{employeeId}")
@@ -115,4 +138,5 @@ public class EmployeeController {
             throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
     }
+
 }

@@ -1,5 +1,7 @@
 package com.employeeservice.employeeappnew.exception;
 
+import com.employeeservice.employeeappnew.dto.APIResponse;
+import com.employeeservice.employeeappnew.dto.ErrorDTO;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,22 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.*;
 
 @RestControllerAdvice
-public class ApplicationGlobalExceptionHandler  extends ResponseEntityExceptionHandler{
+public class ApplicationGlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public APIResponse<?> handleMethodArgumentException(MethodArgumentNotValidException exception) {
+        APIResponse<?> serviceResponse = new APIResponse<>();
+        List<ErrorDTO> errors = new ArrayList<>();
+        exception.getBindingResult().getFieldErrors()
+                .forEach(error -> {
+                    ErrorDTO errorDTO = new ErrorDTO(error.getField(), error.getDefaultMessage());
+                    errors.add(errorDTO);
+                });
+        serviceResponse.setStatus("FAILED");
+        serviceResponse.setErrors(errors);
+        return serviceResponse;
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -42,7 +59,7 @@ public class ApplicationGlobalExceptionHandler  extends ResponseEntityExceptionH
 //        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 //    }
 
-    @Override
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,

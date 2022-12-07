@@ -43,21 +43,12 @@ public class UnitTests {
     @InjectMocks
     private EmployeeController employeeController;
 
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
     private List<EmployeeResponseDTO> employeeResponseDTOList;
 
     private EmployeeRequestDTO employeeRequestDTO;
 
     private EmployeeResponseDTO employeeResponseDTO;
 
-//    @Before
-//    public void setup() {
-//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-//    }
 
     @Test
     @Order(1)

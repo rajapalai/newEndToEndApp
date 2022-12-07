@@ -1,8 +1,14 @@
 package com.employeeservice.employeeappnew.util;
 
+import com.employeeservice.employeeappnew.dto.APIResponse;
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
 import com.employeeservice.employeeappnew.entity.EmployeeEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
 
 public class EmployeeAppUtil {
 
@@ -34,5 +40,14 @@ public class EmployeeAppUtil {
 		employeeResponseDTO.setDesignation(employeeEntity.getDesignation());
 		//employeeResponseDTO.setEmployeeUniqueCode(employeeEntity.getEmployeeUniqueCode());
 	    return employeeResponseDTO;
+	}
+
+	public static String jsonAsString(Object obj){
+		try {
+			return new ObjectMapper().writeValueAsString(obj);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

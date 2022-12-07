@@ -46,7 +46,7 @@ class E2ETests {
 
     @Before
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(this.employeeController).build();
     }
 
     @Test
