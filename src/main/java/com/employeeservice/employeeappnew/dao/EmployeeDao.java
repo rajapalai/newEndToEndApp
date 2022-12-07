@@ -8,6 +8,4 @@ import java.util.Collection;
 
 @Repository
 public interface EmployeeDao extends JpaRepository<EmployeeEntity, Integer>{
-
-   public Collection<EmployeeEntity> findAll(String designation);
 }
