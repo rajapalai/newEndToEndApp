@@ -150,6 +150,22 @@ public class EmployeeController {
         return new ResponseEntity<>("Employee Deleted successfully",HttpStatus.OK);
     }
 
+//    @DeleteMapping("{employeeId}")
+//    public ServiceResponse<String> deleteEmployeeData(@PathVariable(value = "employeeId") Integer employeeId) {
+//        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
+//        try {
+//            EmployeeResponseDTO employeeResponseDTO = employeeService.findEmployeeByID(employeeId);
+//            employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
+//            employeeService.deleteEmployee(employeeId);
+//            logger.info("user deleted successfully: {}",employeeServiceResponse);
+//            return new ServiceResponse<>(HttpStatus.ACCEPTED," EmployeeId => "+ employeeId + employeeResponseDTO +" record deleted successfully");
+//        } catch (Exception exception) {
+//            // employeeServiceResponse.setHttpStatus(HttpStatus.NOT_FOUND);
+//            logger.error("this is a invalid id to delete : {}",employeeId);
+//            return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
+//        }
+//        //return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
+//    }
     @PutMapping("{employeeId}")
     public ServiceResponse<EmployeeResponseDTO> updateEmployeeById(@PathVariable(value = "employeeId") Integer employeeId, @RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
         ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
