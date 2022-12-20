@@ -2,6 +2,7 @@ package com.employeeservice.employeeappnew;
 
 import com.employeeservice.employeeappnew.controller.EmployeeController;
 import com.employeeservice.employeeappnew.dao.EmployeeDao;
+import com.employeeservice.employeeappnew.dto.APIResponse;
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
 import com.employeeservice.employeeappnew.service.EmployeeService;
@@ -31,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.employeeservice.employeeappnew.controller.EmployeeController.SUCCESS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -74,11 +76,11 @@ public class UnitTests {
         employeeResponseDTO = new EmployeeResponseDTO(1,"Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
         employeeRequestDTO = new EmployeeRequestDTO("Smaranika","Pattanayak",50000,"smaranika@gmail.com","5789654789","DEVOPS");
 
-        when(employeeService.onboardNewEmployee(EmployeeBuilder.employeeRequestDTO())).thenReturn(EmployeeBuilder.employeeResponseDTO());
-        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = employeeController.addEmployeeOnboardData(EmployeeBuilder.employeeRequestDTO());
+        when(employeeService.onboardNewEmployee(employeeRequestDTO)).thenReturn(employeeResponseDTO);
+        ResponseEntity<APIResponse> employeeServiceResponse = employeeController.addEmployeeOnboardData(employeeRequestDTO);
 
-        assertEquals(HttpStatus.CREATED,employeeServiceResponse.getHttpStatus());
-        assertEquals(EmployeeBuilder.employeeResponseDTO(),employeeServiceResponse.getResponsePayload());
+        assertEquals(HttpStatus.CREATED,employeeServiceResponse.getStatusCode());
+//        assertEquals());
     }
 
     @Test
@@ -88,10 +90,11 @@ public class UnitTests {
         Integer Id = 1;
 
         when(employeeService.findEmployeeByID(Id)).thenReturn(employeeResponseDTO);
-        ResponseEntity<?> employeeServiceResponse = employeeController.getEmployeeById(Id);
+        ResponseEntity<APIResponse> employeeServiceResponse = (ResponseEntity<APIResponse>) employeeController.getEmployeeById(Id);
 
         assertEquals(HttpStatus.OK,employeeServiceResponse.getStatusCode());
-        //assertEquals(Id,employeeServiceResponse.getBody());
+        assertEquals(1,Id);
+
     }
 
     @Test
@@ -122,9 +125,9 @@ public class UnitTests {
         Integer employeeId = 1;
 
         when(employeeService.findEmployeeByID(employeeId)).thenReturn(employeeResponseDTO);
-        ServiceResponse<String> employeeServiceResponse = employeeController.deleteEmployeeData(employeeId);
+        ResponseEntity<?> employeeServiceResponse = employeeController.deleteEmployeeData(employeeId);
 
-        assertEquals(HttpStatus.ACCEPTED,employeeServiceResponse.getHttpStatus());
+        assertEquals(HttpStatus.OK,employeeServiceResponse.getStatusCode());
 
     }
 }

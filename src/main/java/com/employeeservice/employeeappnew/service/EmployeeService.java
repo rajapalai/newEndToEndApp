@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,23 +29,40 @@ public class EmployeeService implements EmployeeServiceInterface{
 	private EmployeeDao employeeDao;
 
 	@Override
-	public EmployeeResponseDTO onboardNewEmployee(EmployeeRequestDTO employeeRequestDTO) {
+	public EmployeeResponseDTO onboardNewEmployee(EmployeeRequestDTO employeeRequestDTO){
+			EmployeeResponseDTO employeeResponseDTO;
 
-		//Convert DTO -> Entity
-		EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
-//		EmployeeEntity addEmployee = null;
-		try {
-			EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
-			EmployeeResponseDTO employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
-			//employeeResponseDTO.setEmployeeUniqueCode(UUID.randomUUID().toString().split("-")[0]);
-				return employeeResponseDTO;
-		} catch (Exception exception) {
-			throw new EmployeeServiceBusinessException("onboardNewEmployee service method failed....");
-		}
+			try {
+				log.info("EmployeeService:onboardNewEmployee execution started.");
+				EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
+				log.debug("EmployeeService:onboardNewEmployee request parameters {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
+
+				EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
+				employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
+				log.debug("EmployeeService:onboardNewEmployee received response from Database {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
+
+			}catch (Exception e){
+				log.error("Exception occurred while persisting employee to database , Exception message {}", e.getMessage());
+				throw new EmployeeServiceBusinessException("Exception occurred while create a new employee");
+			}
+		log.info("EmployeeService:onboardNewEmployee execution ended.");
+		return employeeResponseDTO;
+
+//		//Convert DTO -> Entity
+//		EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
+////		EmployeeEntity addEmployee = null;
+//		try {
+//			EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
+//			EmployeeResponseDTO employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
+//			//employeeResponseDTO.setEmployeeUniqueCode(UUID.randomUUID().toString().split("-")[0]);
+//				return employeeResponseDTO;
+//		} catch (Exception exception) {
+//			throw new EmployeeServiceBusinessException("onboardNewEmployee service method failed....");
+//		}
 	}
 
 	@Override
-	@Cacheable(value = "employee")
+//	@Cacheable(value = "employee")
 	public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
 
 		Iterable<EmployeeEntity> employeeEntities = null;
@@ -73,7 +91,7 @@ public class EmployeeService implements EmployeeServiceInterface{
 	}
 
 	@Override
-	@Cacheable(value = "employee")
+//	@Cacheable(value = "employee")
 	public void deleteEmployee(Integer employeeId) {
 		try{
 			employeeDao.deleteById(employeeId);

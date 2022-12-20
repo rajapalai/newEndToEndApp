@@ -35,21 +35,19 @@ public class ApplicationGlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetails> handleResourceNotFound(ResourceNotFoundException exception, WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(),exception.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmployeeServiceBusinessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ServiceResponse<?> handleServiceResponse(EmployeeServiceBusinessException exception){
-        ServiceResponse<?> serviceResponse = new ServiceResponse<>();
-        List<ErrorDetails> errorDetails = new ArrayList<>();
-        errorDetails.add(new ErrorDetails(exception.getMessage()));
-        serviceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        serviceResponse.setErrorDetails(errorDetails);
-        return serviceResponse;
+    public APIResponse<?> handleServiceException(EmployeeServiceBusinessException exception) {
+        APIResponse<?> apiResponse = new APIResponse<>();
+        apiResponse.setStatus("FAILED");
+        apiResponse.setErrors(Collections.singletonList(new ErrorDTO("", exception.getMessage())));
+        return apiResponse;
     }
 
     // Handle Exception Globally

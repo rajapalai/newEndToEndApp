@@ -3,10 +3,12 @@ package com.employeeservice.employeeappnew.controller;
 import com.employeeservice.employeeappnew.dto.APIResponse;
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
+import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/employee-service")
 @Slf4j
@@ -27,23 +30,45 @@ public class EmployeeController {
     Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     public static final String SUCCESS = "Success";
+    public static final String FAILURE = "Failure";
     @Autowired
     private EmployeeService employeeService;
 
     @PostMapping
-    public ServiceResponse<EmployeeResponseDTO> addEmployeeOnboardData(@RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
-        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
+    public ResponseEntity<APIResponse> addEmployeeOnboardData(@RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
+        APIResponse<EmployeeResponseDTO> employeeServiceResponse = new APIResponse<>();
         try{
             EmployeeResponseDTO newEmployee = employeeService.onboardNewEmployee(employeeRequestDTO);
-            employeeServiceResponse.setHttpStatus(HttpStatus.CREATED);
-            employeeServiceResponse.setResponsePayload(newEmployee);
-            logger.info("user created: {}", employeeServiceResponse);
+            employeeServiceResponse.setStatus(SUCCESS);
+            employeeServiceResponse.setResults(newEmployee);
+            logger.info("EmployeeController::addEmployeeOnboardData request body {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
         } catch (Exception exception){
-            employeeServiceResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
-            logger.error("user not created : {}",employeeServiceResponse);
+//            employeeServiceResponse.setStatus("Employee data not onboarded : " + HttpStatus.BAD_REQUEST);
+//            employeeServiceResponse.setStatus("This employee data already onboarded : " + employeeRequestDTO);
+            logger.error("user not created : {}",employeeServiceResponse.getResults());
+            throw new ResourceNotFoundException("Employee",employeeRequestDTO,HttpStatus.BAD_REQUEST);
         }
-        return employeeServiceResponse;
+        return new ResponseEntity<>(employeeServiceResponse, HttpStatus.CREATED);
     }
+
+//    @PostMapping
+//    public ResponseEntity<APIResponse> addEmployeeOnboardData(@RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
+//
+//        log.info("EmployeeController::addEmployeeOnboardData request body {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
+//
+//        EmployeeResponseDTO employeeResponseDTO = employeeService.onboardNewEmployee(employeeRequestDTO);
+//        //Builder Design pattern
+//
+//        APIResponse<EmployeeResponseDTO> responseDTO = APIResponse
+//                .<EmployeeResponseDTO>builder()
+//                .status(SUCCESS)
+//                .results(employeeResponseDTO)
+//                .build();
+//
+//        log.info("EmployeeController::addEmployeeOnboardData response {}", EmployeeAppUtil.jsonAsString(responseDTO));
+//
+//        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+//    }
 
     @GetMapping
     public ServiceResponse<List<EmployeeResponseDTO>> getAllEmployees() {
@@ -113,20 +138,16 @@ public class EmployeeController {
     }
 
     @DeleteMapping("{employeeId}")
-    public ServiceResponse<String> deleteEmployeeData(@PathVariable(value = "employeeId") Integer employeeId) {
-        ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
+    public ResponseEntity<?> deleteEmployeeData(@PathVariable(value = "employeeId") Integer employeeId) {
         try {
-            EmployeeResponseDTO employeeResponseDTO = employeeService.findEmployeeByID(employeeId);
-            employeeServiceResponse.setHttpStatus(HttpStatus.FOUND);
             employeeService.deleteEmployee(employeeId);
-            logger.info("user deleted successfully: {}",employeeServiceResponse);
-            return new ServiceResponse<>(HttpStatus.ACCEPTED," EmployeeId => "+ employeeId + employeeResponseDTO +" record deleted successfully");
+            logger.info("user deleted successfully: {}",employeeId);
         } catch (Exception exception) {
            // employeeServiceResponse.setHttpStatus(HttpStatus.NOT_FOUND);
             logger.error("this is a invalid id to delete : {}",employeeId);
-            return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
+            throw new ResourceNotFoundException("Employee","employeeID",employeeId);
         }
-        //return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
+        return new ResponseEntity<>("Employee Deleted successfully",HttpStatus.OK);
     }
 
     @PutMapping("{employeeId}")

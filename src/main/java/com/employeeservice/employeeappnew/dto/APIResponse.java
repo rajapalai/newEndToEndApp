@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public class APIResponse<T> {
     private List<ErrorDTO> errors;
     private T results;
 
+    public APIResponse(String status, T results) {
+        this.status = status;
+        this.results = results;
+    }
 }
