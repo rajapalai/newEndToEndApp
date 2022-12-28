@@ -23,30 +23,30 @@ import java.util.stream.StreamSupport;
 @Service
 @Transactional
 @Slf4j
-public class EmployeeService implements EmployeeServiceInterface{
+public class EmployeeService implements EmployeeServiceInterface {
 
-	@Autowired
-	private EmployeeDao employeeDao;
+    @Autowired
+    private EmployeeDao employeeDao;
 
-	@Override
-	public EmployeeResponseDTO onboardNewEmployee(EmployeeRequestDTO employeeRequestDTO){
-			EmployeeResponseDTO employeeResponseDTO;
+    @Override
+    public EmployeeResponseDTO onboardNewEmployee(EmployeeRequestDTO employeeRequestDTO) {
+        EmployeeResponseDTO employeeResponseDTO;
 
-			try {
-				log.info("EmployeeService:onboardNewEmployee execution started.");
-				EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
-				log.debug("EmployeeService:onboardNewEmployee request parameters {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
+        try {
+            log.info("EmployeeService:onboardNewEmployee execution started.");
+            EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
+            log.debug("EmployeeService:onboardNewEmployee request parameters {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
 
-				EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
-				employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
-				log.debug("EmployeeService:onboardNewEmployee received response from Database {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
+            EmployeeEntity addEmployee = employeeDao.save(employeeEntity);
+            employeeResponseDTO = EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(addEmployee);
+            log.debug("EmployeeService:onboardNewEmployee received response from Database {}", EmployeeAppUtil.jsonAsString(employeeRequestDTO));
 
-			}catch (Exception e){
-				log.error("Exception occurred while persisting employee to database , Exception message {}", e.getMessage());
-				throw new EmployeeServiceBusinessException("Exception occurred while create a new employee");
-			}
-		log.info("EmployeeService:onboardNewEmployee execution ended.");
-		return employeeResponseDTO;
+        } catch (Exception e) {
+            log.error("Exception occurred while persisting employee to database , Exception message {}", e.getMessage());
+            throw new EmployeeServiceBusinessException("Exception occurred while create a new employee");
+        }
+        log.info("EmployeeService:onboardNewEmployee execution ended.");
+        return employeeResponseDTO;
 
 //		//Convert DTO -> Entity
 //		EmployeeEntity employeeEntity = EmployeeAppUtil.mapEmployeeDTOToEmployeeEntity(employeeRequestDTO);
@@ -59,90 +59,95 @@ public class EmployeeService implements EmployeeServiceInterface{
 //		} catch (Exception exception) {
 //			throw new EmployeeServiceBusinessException("onboardNewEmployee service method failed....");
 //		}
-	}
+    }
 
-	@Override
+    @Override
 //	@Cacheable(value = "employee")
-	public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
+    public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
 
-		Iterable<EmployeeEntity> employeeEntities = null;
-		try {
-			employeeEntities = employeeDao.findAll();
-			return StreamSupport.stream(employeeEntities.spliterator(),false)
-					.map(EmployeeAppUtil::mapEmployeeEntityToEmployeeDTO)
-					.collect(Collectors.toList());
-		} catch (Exception exception) {
-			throw new EmployeeServiceBusinessException("viewAllOnboardEmployees service method failed....");
-		}
-	}
+        Iterable<EmployeeEntity> employeeEntities = null;
+        try {
+            log.info("EmployeeService:viewAllOnboardEmployees execution started.");
+            employeeEntities = employeeDao.findAll();
+            log.debug("EmployeeService:onboardNewEmployee request parameters {}", EmployeeAppUtil.jsonAsString(employeeEntities));
+            log.info("EmployeeService:viewAllOnboardEmployees execution ended.");
+            return StreamSupport.stream(employeeEntities.spliterator(), false)
+                    .map(EmployeeAppUtil::mapEmployeeEntityToEmployeeDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            log.error("Exception occurred while persisting employee to database , Exception message {}", exception.getMessage());
+            throw new EmployeeServiceBusinessException("viewAllOnboardEmployees service method failed....");
+        }
 
-	@Override
-	@Cacheable(value = "employee")
-	public EmployeeResponseDTO findEmployeeByID(Integer employeeId) {
+    }
 
-		EmployeeEntity employeeEntity = null;
-		try {
-			employeeEntity = employeeDao.findById(employeeId)
-					.orElseThrow(() -> new ResourceNotFoundException("Employee","employeeID",employeeId));
-			return EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(employeeEntity);
-		} catch (Exception exception) {
-			throw new EmployeeServiceBusinessException("findEmployeeByID service method failed....");
-		}
-	}
+    @Override
+    @Cacheable(value = "employee")
+    public EmployeeResponseDTO findEmployeeByID(Integer employeeId) {
 
-	@Override
+        EmployeeEntity employeeEntity = null;
+        try {
+            employeeEntity = employeeDao.findById(employeeId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Employee", "employeeID", employeeId));
+            return EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(employeeEntity);
+        } catch (Exception exception) {
+            throw new EmployeeServiceBusinessException("findEmployeeByID service method failed....");
+        }
+    }
+
+    @Override
 //	@Cacheable(value = "employee")
-	public void deleteEmployee(Integer employeeId) {
-		try{
-			employeeDao.deleteById(employeeId);
-		} catch (Exception e){
-			//throw new ResourceNotFoundException("Employee","employeeID",employeeId);
-			throw new EmployeeServiceBusinessException("deleteEmployee service method failed....");
-		}
-	}
+    public void deleteEmployee(Integer employeeId) {
+        try {
+            employeeDao.deleteById(employeeId);
+        } catch (Exception e) {
+            //throw new ResourceNotFoundException("Employee","employeeID",employeeId);
+            throw new EmployeeServiceBusinessException("deleteEmployee service method failed....");
+        }
+    }
 
-	@Override
-	@Cacheable(value = "employee")
-	public EmployeeResponseDTO updateEmployeeByEmployeeId(Integer employeeId, EmployeeRequestDTO employeeRequestDTO) {
+    @Override
+    @Cacheable(value = "employee")
+    public EmployeeResponseDTO updateEmployeeByEmployeeId(Integer employeeId, EmployeeRequestDTO employeeRequestDTO) {
 
-		//Get the existing object
-		EmployeeEntity existingEmployeeEntity = null;
-		try {
-			existingEmployeeEntity = employeeDao.findById(employeeId)
-					.orElseThrow(() -> new ResourceNotFoundException("Employee","employeeID",employeeId));
-			//Modified the existing object with the new value
-			existingEmployeeEntity.setEmployeeFirstName(employeeRequestDTO.getEmployeeFirstName());
-			existingEmployeeEntity.setEmployeeLastName(employeeRequestDTO.getEmployeeLastName());
-			//existingEmployeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
-			existingEmployeeEntity.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
-			existingEmployeeEntity.setEmail(employeeRequestDTO.getEmail());
-			existingEmployeeEntity.setContactNumber(employeeRequestDTO.getContactNumber());
-			existingEmployeeEntity.setDesignation(employeeRequestDTO.getDesignation());
-			//save the modified value
-			EmployeeEntity updateEmployeeEntity = employeeDao.save(existingEmployeeEntity);
-			return EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(updateEmployeeEntity);
-		} catch (Exception exception) {
-			throw new EmployeeServiceBusinessException("updateEmployeeByEmployeeId service method failed....");
-		}
-	}
+        //Get the existing object
+        EmployeeEntity existingEmployeeEntity = null;
+        try {
+            existingEmployeeEntity = employeeDao.findById(employeeId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Employee", "employeeID", employeeId));
+            //Modified the existing object with the new value
+            existingEmployeeEntity.setEmployeeFirstName(employeeRequestDTO.getEmployeeFirstName());
+            existingEmployeeEntity.setEmployeeLastName(employeeRequestDTO.getEmployeeLastName());
+            //existingEmployeeEntity.setEmployeeJoiningDate(employeeRequestDTO.getEmployeeJoiningDate());
+            existingEmployeeEntity.setEmployeeSalary(employeeRequestDTO.getEmployeeSalary());
+            existingEmployeeEntity.setEmail(employeeRequestDTO.getEmail());
+            existingEmployeeEntity.setContactNumber(employeeRequestDTO.getContactNumber());
+            existingEmployeeEntity.setDesignation(employeeRequestDTO.getDesignation());
+            //save the modified value
+            EmployeeEntity updateEmployeeEntity = employeeDao.save(existingEmployeeEntity);
+            return EmployeeAppUtil.mapEmployeeEntityToEmployeeDTO(updateEmployeeEntity);
+        } catch (Exception exception) {
+            throw new EmployeeServiceBusinessException("updateEmployeeByEmployeeId service method failed....");
+        }
+    }
 
-	@Cacheable(value = "employee")
-	public Map<String, List<EmployeeResponseDTO>> getAllEmployeeDesignationByTypes() {
-		try {
-			log.info("EmployeeService:getAllEmployeeDesignationByTypes execution started.");
+    @Cacheable(value = "employee")
+    public Map<String, List<EmployeeResponseDTO>> getAllEmployeeDesignationByTypes() {
+        try {
+            log.info("EmployeeService:getAllEmployeeDesignationByTypes execution started.");
 
-			Map<String, List<EmployeeResponseDTO>> employeeDesignationMap =
-					employeeDao.findAll().stream()
-							.map(EmployeeAppUtil::mapEmployeeEntityToEmployeeDTO)
-							.filter(employeeResponseDTO -> employeeResponseDTO.getDesignation() != null)
-							.collect(Collectors.groupingBy(EmployeeResponseDTO::getDesignation));
+            Map<String, List<EmployeeResponseDTO>> employeeDesignationMap =
+                    employeeDao.findAll().stream()
+                            .map(EmployeeAppUtil::mapEmployeeEntityToEmployeeDTO)
+                            .filter(employeeResponseDTO -> employeeResponseDTO.getDesignation() != null)
+                            .collect(Collectors.groupingBy(EmployeeResponseDTO::getDesignation));
 
-			log.info("EmployeeService:getAllEmployeeDesignationByTypes execution ended.");
-			return employeeDesignationMap;
+            log.info("EmployeeService:getAllEmployeeDesignationByTypes execution ended.");
+            return employeeDesignationMap;
 
-		} catch (Exception ex) {
-			log.error("Exception occurred while retrieving employee designation grouping by type from database , Exception message {}", ex.getMessage());
-			throw new EmployeeServiceBusinessException("Exception occurred while fetch employee designation from Database ");
-		}
-	}
+        } catch (Exception ex) {
+            log.error("Exception occurred while retrieving employee designation grouping by type from database , Exception message {}", ex.getMessage());
+            throw new EmployeeServiceBusinessException("Exception occurred while fetch employee designation from Database ");
+        }
+    }
 }

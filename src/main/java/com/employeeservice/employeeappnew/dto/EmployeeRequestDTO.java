@@ -30,6 +30,7 @@ public class EmployeeRequestDTO {
 	private double employeeSalary;
 
 	@Email(message = "Invalid email Id")
+	@NotBlank(message = "Invalid email Id")
 	private String email;
 
 	@Pattern(regexp = "^[0-9]{10}$")
