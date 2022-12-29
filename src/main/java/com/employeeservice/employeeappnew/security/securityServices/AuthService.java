@@ -1,7 +1,7 @@
 package com.employeeservice.employeeappnew.security.securityServices;
 
+import com.employeeservice.employeeappnew.exception.EmployeeServiceBusinessException;
 import com.employeeservice.employeeappnew.exception.RegisteredUserNotFoundException;
-import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.security.securityDao.SecurityRoleDao;
 import com.employeeservice.employeeappnew.security.securityDao.SecurityUserDao;
 import com.employeeservice.employeeappnew.security.securityEntity.LoginDTO;
@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -54,8 +55,8 @@ public class AuthService implements AuthServiceInterface {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginDTO.getUserNameOrEmail(), loginDTO.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return "LogIn Successfully.. \n" +"Hello " +loginDTO.getUserNameOrEmail() + "\nYou can access this Employee application !..";
-        }catch (Exception exception){
+            return "LogIn Successfully.. \n" + "Hello " + loginDTO.getUserNameOrEmail() + "\nYou can access this Employee application !.. \nWith this credential !..";
+        } catch (Exception exception) {
             throw new RegisteredUserNotFoundException(HttpStatus.BAD_REQUEST, "Please enter a valid username or password!.. ");
         }
     }
@@ -115,5 +116,22 @@ public class AuthService implements AuthServiceInterface {
         securityUserDao.save(user);
 
         return user;
+    }
+
+    @Override
+    public List<User> getAllUserDetails() {
+        return securityUserDao.findAll();
+    }
+
+    @Override
+    public User getUserById(Long userId) {
+        User getUserById = null;
+        try {
+            getUserById = securityUserDao.findById(userId)
+                    .orElseThrow(() -> new RegisteredUserNotFoundException(HttpStatus.NOT_FOUND, "User not found with this id : " + userId));
+            return getUserById;
+        } catch (Exception exception) {
+            throw new EmployeeServiceBusinessException("Get user by id method failed" + exception.getMessage());
+        }
     }
 }

@@ -33,7 +33,7 @@ public class ApplicationGlobalExceptionHandler{
                     ErrorDTO errorDTO = new ErrorDTO(error.getField(), error.getDefaultMessage());
                     errors.add(errorDTO);
                 });
-        serviceResponse.setStatus("FAILED");
+        serviceResponse.setStatus(String.valueOf(HttpStatus.BAD_REQUEST));
         serviceResponse.setErrors(errors);
         return serviceResponse;
     }

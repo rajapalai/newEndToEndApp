@@ -40,15 +40,29 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
+    //    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.csrf().disable()
+//                .authorizeRequests().antMatchers("/employee-service/**","/employee-service/**").permitAll()
+//                .antMatchers(HttpHeaders.ALLOW).permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/employee-service/**").permitAll().anyRequest().authenticated()
+//                .and()
+//                .build();
+//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.authorizeRequests()
+//                .antMatchers("/nonsecureapp").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/welcome", "/text")
+//                .authenticated().and().httpBasic().and().build();
         return http.csrf().disable()
-                .authorizeRequests().antMatchers("/employee-service/**","/employee-service/**").permitAll()
-                .antMatchers(HttpHeaders.ALLOW).permitAll()
+                .authorizeRequests()
+                .antMatchers("/employee-service/v1/app", "/employee-service/auth").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/employee-service/**").permitAll().anyRequest().authenticated()
-                .and()
-                .build();
+                .authorizeRequests().antMatchers("/employees/**")
+                .authenticated().and().httpBasic().and().build();
     }
 
 //    @Bean

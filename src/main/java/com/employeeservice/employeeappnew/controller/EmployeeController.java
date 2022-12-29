@@ -24,7 +24,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/employee-service")
+@RequestMapping("/employee-service/v1/app")
 @Slf4j
 public class EmployeeController {
 
@@ -36,7 +36,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<APIResponse> addEmployeeOnboardData(@RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
         APIResponse<EmployeeResponseDTO> employeeServiceResponse = new APIResponse<>();
         try {
@@ -75,7 +75,7 @@ public class EmployeeController {
 //    }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ServiceResponse<List<EmployeeResponseDTO>> getAllEmployees() {
         ServiceResponse<List<EmployeeResponseDTO>> employeeServiceResponse = new ServiceResponse<>();
         List<EmployeeResponseDTO> employeeResponseDTOS = null;
@@ -96,7 +96,7 @@ public class EmployeeController {
     //New Api
     //Builder Design Pattern
     @GetMapping("/designationTypes")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<APIResponse> getEmployeesByDesignation() {
         Map<String, List<EmployeeResponseDTO>> employees = employeeService.getAllEmployeeDesignationByTypes();
         APIResponse<Map<String, List<EmployeeResponseDTO>>> responseDTO = APIResponse
@@ -111,7 +111,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/search/path/{employeeId}")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<?> getEmployeeById(@PathVariable(value = "employeeId") Integer employeeId) {
         log.info("EmployeeController::getEmployee by id  {} ", employeeId);
         try {
@@ -132,7 +132,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/search/request")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ServiceResponse<EmployeeResponseDTO> getEmployeeUsingRequestParam(@RequestParam(required = false) Integer employeeId) {
         ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
         try {
@@ -148,7 +148,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("{employeeId}")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<?> deleteEmployeeData(@PathVariable(value = "employeeId") Integer employeeId) {
         try {
             employeeService.deleteEmployee(employeeId);
@@ -178,7 +178,7 @@ public class EmployeeController {
 //        //return new ServiceResponse<>(HttpStatus.NO_CONTENT," EmployeeId => "+ employeeId +" no record found with this Employee Id");
 //    }
     @PutMapping("{employeeId}")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ServiceResponse<EmployeeResponseDTO> updateEmployeeById(@PathVariable(value = "employeeId") Integer employeeId, @RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
         ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
         try {

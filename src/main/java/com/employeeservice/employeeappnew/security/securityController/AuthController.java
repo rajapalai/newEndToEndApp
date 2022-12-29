@@ -10,15 +10,13 @@ import com.employeeservice.employeeappnew.security.securityServices.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/employee-service")
+@RequestMapping("/employee-service/auth")
 public class AuthController {
 
     private AuthService authService;
@@ -60,5 +58,21 @@ public class AuthController {
     public ResponseEntity<User> adminRegister(@RequestBody @Valid RegisterDto registerDto) {
         User user = authService.adminRegister(registerDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = {"/registerdUsers", "/signupUsers"})
+    public ResponseEntity<List<User>> getAllListOfUsersData() {
+        List<User> getAllUsers = authService.getAllUserDetails();
+        return new ResponseEntity<>(getAllUsers, HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserByID(@PathVariable(value = "userId") Long userId) {
+        try {
+            User getUserById = authService.getUserById(userId);
+            return new ResponseEntity<>(getUserById,HttpStatus.OK);
+        }catch (Exception exception){
+            throw new ResourceNotFoundException("Id : " + userId , HttpStatus.BAD_REQUEST);
+        }
     }
 }

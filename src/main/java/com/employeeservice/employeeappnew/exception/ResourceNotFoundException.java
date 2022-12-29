@@ -2,6 +2,7 @@ package com.employeeservice.employeeappnew.exception;
 
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.security.securityEntity.Role;
+import com.employeeservice.employeeappnew.security.securityEntity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 
@@ -35,6 +36,10 @@ public class ResourceNotFoundException extends RuntimeException {
     }
     public ResourceNotFoundException() {
 
+    }
+
+    public ResourceNotFoundException(String s, HttpStatus badRequest) {
+        super(String.format("User not found with %s : '%s'",s,badRequest));
     }
 
     public String getResourceName() {
