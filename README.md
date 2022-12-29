@@ -24,6 +24,9 @@ SWAGGER
 ========
 http://localhost:9090/swagger-ui/index.html
 -------------------------------------------------
+![img_18.png](img_18.png)
+
+
 POST
 ====
 http://localhost:9090/employee-service
