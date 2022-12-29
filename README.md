@@ -20,7 +20,7 @@ App API with authentication (ROLE_USER or ROLE_ADMIN credential mandatory)
 ![img_12.png](img_12.png)
 ![img_13.png](img_13.png)
 
-SWAGGER
+SWAGGER (OPEN API)
 ========
 http://localhost:9090/swagger-ui/index.html
 -------------------------------------------------
