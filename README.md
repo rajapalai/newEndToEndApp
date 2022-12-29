@@ -9,6 +9,8 @@ Authentication API
 ![img_6.png](img_6.png)
 ![img_7.png](img_7.png)
 ![img_8.png](img_8.png)
+![img_14.png](img_14.png)
+![img_15.png](img_15.png)
 
 App API with authentication (ROLE_USER or ROLE_ADMIN credential mandatory)
 ==========================================================================
