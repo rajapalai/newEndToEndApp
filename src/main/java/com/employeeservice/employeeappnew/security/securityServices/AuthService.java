@@ -2,6 +2,9 @@ package com.employeeservice.employeeappnew.security.securityServices;
 
 import com.employeeservice.employeeappnew.exception.EmployeeServiceBusinessException;
 import com.employeeservice.employeeappnew.exception.RegisteredUserNotFoundException;
+//import com.employeeservice.employeeappnew.security.JWT.JwtTokenProvider;
+import com.employeeservice.employeeappnew.security.JWT.JwtTokenProvider;
+//import com.employeeservice.employeeappnew.security.JWT_NEW.JwtUtil;
 import com.employeeservice.employeeappnew.security.securityDao.SecurityRoleDao;
 import com.employeeservice.employeeappnew.security.securityDao.SecurityUserDao;
 import com.employeeservice.employeeappnew.security.securityEntity.LoginDTO;
@@ -28,34 +31,38 @@ public class AuthService implements AuthServiceInterface {
     private AuthenticationManager authenticationManager;
     private SecurityRoleDao securityRoleDao;
     private SecurityUserDao securityUserDao;
-
     private PasswordEncoder passwordEncoder;
+    private JwtTokenProvider jwtTokenProvider;
+//    private JwtUtil jwtUtil;
 
     public AuthService(AuthenticationManager authenticationManager,
                        SecurityRoleDao securityRoleDao,
                        SecurityUserDao securityUserDao,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       JwtTokenProvider jwtTokenProvider
+//                       JwtUtil jwtUtil
+                       ) {
 
         this.authenticationManager = authenticationManager;
         this.securityRoleDao = securityRoleDao;
         this.securityUserDao = securityUserDao;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
+//        this.jwtUtil = jwtUtil;
     }
 
     @Override
     public String login(LoginDTO loginDTO) {
+        Authentication authentication;
         try {
-//            if (securityUserDao.existsByUserName(loginDTO.getUserNameOrEmail())) {
-//                throw new RegisteredUserNotFoundException(HttpStatus.BAD_REQUEST, "Please enter a valid username or password!.. ");
-//            }
-//            if (securityUserDao.existsByEmail(loginDTO.getPassword())) {
-//                throw new RegisteredUserNotFoundException(HttpStatus.BAD_REQUEST, "Please enter a valid username or password!.. ");
-//            }
-
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginDTO.getUserNameOrEmail(), loginDTO.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return "LogIn Successfully.. \n" + "Hello " + loginDTO.getUserNameOrEmail() + "\nYou can access this Employee application !.. \nWith this credential !..";
+
+            //Generate JWT token
+            String token = jwtTokenProvider.generateToken(authentication);
+            return token;
+//            return "LogIn Successfully.. \n" + "Hello " + loginDTO.getUserNameOrEmail() + "\nYou can access this Employee application !.. \nWith this credential !..";
         } catch (Exception exception) {
             throw new RegisteredUserNotFoundException(HttpStatus.BAD_REQUEST, "Please enter a valid username or password!.. ");
         }

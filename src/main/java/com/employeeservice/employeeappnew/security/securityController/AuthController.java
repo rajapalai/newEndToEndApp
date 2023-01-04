@@ -1,10 +1,8 @@
 package com.employeeservice.employeeappnew.security.securityController;
 
+import com.employeeservice.employeeappnew.dto.APIResponse;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
-import com.employeeservice.employeeappnew.security.securityEntity.LoginDTO;
-import com.employeeservice.employeeappnew.security.securityEntity.RegisterDto;
-import com.employeeservice.employeeappnew.security.securityEntity.Role;
-import com.employeeservice.employeeappnew.security.securityEntity.User;
+import com.employeeservice.employeeappnew.security.securityEntity.*;
 import com.employeeservice.employeeappnew.security.securityServices.AuthService;
 import com.employeeservice.employeeappnew.security.securityServices.RoleService;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,7 @@ import java.util.List;
 @RequestMapping("/employee-service/auth")
 public class AuthController {
 
+    public static final String SUCCESS = "Success";
     private AuthService authService;
     private RoleService roleService;
 
@@ -41,9 +40,19 @@ public class AuthController {
 
     //BUILD LOGIN REST API
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<String> login(@RequestBody @Valid LoginDTO loginDTO) {
+    public ResponseEntity<JwtAuthResponseDto> login(@RequestBody @Valid LoginDTO loginDTO) {
+
         String response = authService.login(loginDTO);
-        return ResponseEntity.ok(response);
+
+//        String token = authService.login(loginDTO);
+        JwtAuthResponseDto jwtAuthResponseDto = new JwtAuthResponseDto();
+        jwtAuthResponseDto.setAccess_token(response);
+        jwtAuthResponseDto.setStatus(HttpStatus.OK);
+//        jwtAuthResponseDto.setUserNameOrEmail(response);
+//        jwtAuthResponseDto.setPassword(response);
+//        jwtAuthResponseDto.setAccess_token(token);
+//        jwtAuthResponseDto.setRefresh_token(response);
+        return ResponseEntity.ok(jwtAuthResponseDto);
     }
 
     //BUILD REGISTERED USER REST API

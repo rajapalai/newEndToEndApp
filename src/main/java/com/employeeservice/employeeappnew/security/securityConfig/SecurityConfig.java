@@ -1,22 +1,25 @@
 package com.employeeservice.employeeappnew.security.securityConfig;
 
 
+import com.employeeservice.employeeappnew.security.JWT.JwtAuthenticationEntryPoint;
+//import com.employeeservice.employeeappnew.security.JWT.JwtAuthenticationFilter;
+//import com.employeeservice.employeeappnew.security.JWT_NEW.JwtFilter;
+//import com.employeeservice.employeeappnew.security.JWT_NEW.JwtUtil;
+import com.employeeservice.employeeappnew.security.JWT.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +29,20 @@ public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    private JwtAuthenticationEntryPoint authenticationEntryPoint;
+
+//    private JwtFilter jwtFilter;
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(UserDetailsService userDetailsService,
+                          JwtAuthenticationEntryPoint authenticationEntryPoint,
+                          JwtAuthenticationFilter jwtAuthenticationFilter
+//                          JwtFilter jwtFilter
+    ) {
         this.userDetailsService = userDetailsService;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+//        this.jwtFilter = jwtFilter;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
@@ -40,30 +55,29 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    //    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.csrf().disable()
-//                .authorizeRequests().antMatchers("/employee-service/**","/employee-service/**").permitAll()
-//                .antMatchers(HttpHeaders.ALLOW).permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/employee-service/**").permitAll().anyRequest().authenticated()
-//                .and()
-//                .build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.authorizeRequests()
-//                .antMatchers("/nonsecureapp").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/welcome", "/text")
-//                .authenticated().and().httpBasic().and().build();
-        return http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/employee-service/v1/app", "/employee-service/auth").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/employees/**")
-                .authenticated().and().httpBasic().and().build();
+        http.csrf().disable()
+                .authorizeHttpRequests((authorize) ->
+                        authorize.antMatchers("/employee-service/v1/app", "/employee-service/**").permitAll()
+                                .antMatchers("/employee-service/**").permitAll()
+                                .anyRequest().authenticated())
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
+                .sessionManagement(sesson -> sesson.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
+//        return http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/employee-service/v1/app", "/employee-service/auth").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/employees/**")
+//                .authenticated().and().httpBasic().and().build();
+//    }
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {

@@ -4,6 +4,7 @@ import com.employeeservice.employeeappnew.exception.JwtValidateApiException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -14,22 +15,25 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
+    @Value("${app.jwt-secret}")
     private String jwtSecret;
+    @Value("${app-jwt-expiration-milliseconds}")
     private String jwtExpiration;
 
+    //Generate JWT token
     public String generateToken(Authentication authentication) {
         String userName = authentication.getName();
         Date currentDate = new Date();
-        Date expireDate = new Date(currentDate.getTime() + jwtExpiration);
+        Date expireDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 10);
 
-        String jwtToken = Jwts.builder()
+        String token = Jwts.builder()
                 .setSubject(userName)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
                 .signWith(key())
                 .compact();
 
-        return jwtToken;
+        return token;
     }
 
     private Key key() {
@@ -54,15 +58,10 @@ public class JwtTokenProvider {
                     .setSigningKey(key())
                     .build()
                     .parse(token);
-            return true;
-        }catch (MalformedJwtException e) {
-            throw new JwtValidateApiException(HttpStatus.BAD_REQUEST, "Invalid JWT token!..");
-        }catch (ExpiredJwtException e) {
-            throw new JwtValidateApiException(HttpStatus.BAD_REQUEST, "Expired JWT token!..");
-        }catch (UnsupportedJwtException e) {
-            throw new JwtValidateApiException(HttpStatus.BAD_REQUEST, "Unsupported JWT token!..");
-        }catch (IllegalArgumentException e){
-            throw new JwtValidateApiException(HttpStatus.BAD_REQUEST, "JWT claims string is emplty!..");
+
+        }catch (Exception e) {
+            throw new JwtValidateApiException(HttpStatus.BAD_REQUEST,"Please Provide Valid JWT Token!..");
         }
+        return true;
     }
 }
