@@ -30,6 +30,9 @@ http://localhost:9090/swagger-ui/index.html
 -------------------------------------------------
 ![img_18.png](img_18.png)
 
+DOCKER
+=======
+![img_20.png](img_20.png)
 
 POST
 ====

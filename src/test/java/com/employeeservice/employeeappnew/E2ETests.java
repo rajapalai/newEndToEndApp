@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -51,6 +52,7 @@ class E2ETests {
 
     @Test
     @Order(1)
+    @WithMockUser(username = "raja" , password = "Rajapalai1@" , roles = "ROLE_ADMIN")
     public void addEmployeeOnboardDataTest() throws Exception {
 
         Mockito.when(employeeService.onboardNewEmployee(ArgumentMatchers.any(EmployeeRequestDTO.class))).thenReturn(EmployeeBuilder.employeeResponseDTO());
