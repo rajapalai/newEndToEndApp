@@ -8,7 +8,7 @@ public class JwtValidateApiException extends RuntimeException{
     private String message;
 
     public JwtValidateApiException(HttpStatus httpStatus, String message) {
-        super(String.format("Please unthenticate your self using JWT %s", httpStatus));
+        super(String.format("Please authenticate your self using JWT %s", httpStatus));
         this.httpStatus = httpStatus;
         this.message = message;
     }

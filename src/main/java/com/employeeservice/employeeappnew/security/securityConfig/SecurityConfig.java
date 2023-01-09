@@ -59,7 +59,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.antMatchers("/employee-service/v1/app", "/employee-service/**").permitAll()
+                        authorize.antMatchers("/employee-service/v1/app", "/employee-service/auth").permitAll()
                                 .antMatchers("/employee-service/**").permitAll()
                                 .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
