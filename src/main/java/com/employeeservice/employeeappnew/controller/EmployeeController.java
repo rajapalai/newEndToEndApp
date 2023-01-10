@@ -133,7 +133,7 @@ public class EmployeeController {
 
     @GetMapping("/search/request")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
-    public ServiceResponse<EmployeeResponseDTO> getEmployeeUsingRequestParam(@RequestParam(required = false) Integer employeeId) {
+    public ServiceResponse<EmployeeResponseDTO> getEmployeeUsingRequestParam(@RequestParam(required = true) Integer employeeId) {
         ServiceResponse<EmployeeResponseDTO> employeeServiceResponse = new ServiceResponse<>();
         try {
             EmployeeResponseDTO responseDTO = employeeService.findEmployeeByID(employeeId);

@@ -62,7 +62,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-//	@Cacheable(value = "employee")
+    @Cacheable(cacheNames = "employee")
     public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
 
         Iterable<EmployeeEntity> employeeEntities = null;
@@ -82,7 +82,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-    @Cacheable(value = "employee")
+//    @Cacheable(value = "employee")
     public EmployeeResponseDTO findEmployeeByID(Integer employeeId) {
 
         EmployeeEntity employeeEntity = null;
@@ -107,7 +107,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-    @Cacheable(value = "employee")
+//    @Cacheable(value = "employee")
     public EmployeeResponseDTO updateEmployeeByEmployeeId(Integer employeeId, EmployeeRequestDTO employeeRequestDTO) {
 
         //Get the existing object
@@ -131,7 +131,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         }
     }
 
-    @Cacheable(value = "employee")
+//    @Cacheable(value = "employee")
     public Map<String, List<EmployeeResponseDTO>> getAllEmployeeDesignationByTypes() {
         try {
             log.info("EmployeeService:getAllEmployeeDesignationByTypes execution started.");

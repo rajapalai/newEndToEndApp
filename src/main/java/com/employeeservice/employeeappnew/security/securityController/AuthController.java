@@ -5,6 +5,8 @@ import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.security.securityEntity.*;
 import com.employeeservice.employeeappnew.security.securityServices.AuthService;
 import com.employeeservice.employeeappnew.security.securityServices.RoleService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee-service/auth")
+@Slf4j
 public class AuthController {
 
     public static final String SUCCESS = "Success";
@@ -70,12 +73,14 @@ public class AuthController {
     }
 
     @GetMapping(value = {"/registerdUsers", "/signupUsers"})
+    @Cacheable(cacheNames = "registerdUsers")
     public ResponseEntity<List<User>> getAllListOfUsersData() {
         List<User> getAllUsers = authService.getAllUserDetails();
         return new ResponseEntity<>(getAllUsers, HttpStatus.OK);
     }
 
     @GetMapping("/{userId}")
+    @Cacheable(cacheNames = "registerdUser")
     public ResponseEntity<User> getUserByID(@PathVariable(value = "userId") Long userId) {
         try {
             User getUserById = authService.getUserById(userId);

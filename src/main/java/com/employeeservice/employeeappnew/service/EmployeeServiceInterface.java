@@ -2,6 +2,7 @@ package com.employeeservice.employeeappnew.service;
 
 import com.employeeservice.employeeappnew.dto.EmployeeRequestDTO;
 import com.employeeservice.employeeappnew.dto.EmployeeResponseDTO;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
