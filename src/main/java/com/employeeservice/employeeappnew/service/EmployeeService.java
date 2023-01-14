@@ -7,9 +7,10 @@ import com.employeeservice.employeeappnew.entity.EmployeeEntity;
 import com.employeeservice.employeeappnew.exception.EmployeeServiceBusinessException;
 import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +24,14 @@ import java.util.stream.StreamSupport;
 @Service
 @Transactional
 @Slf4j
+@CacheConfig(cacheNames = "employeeRequestDTO")
 public class EmployeeService implements EmployeeServiceInterface {
 
     @Autowired
     private EmployeeDao employeeDao;
 
     @Override
+    @CachePut(key = "#employeeRequestDTO.email")
     public EmployeeResponseDTO onboardNewEmployee(EmployeeRequestDTO employeeRequestDTO) {
         EmployeeResponseDTO employeeResponseDTO;
 
@@ -62,7 +65,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-    @Cacheable(cacheNames = "employee")
+    @Cacheable
     public List<EmployeeResponseDTO> viewAllOnboardEmployees() {
 
         Iterable<EmployeeEntity> employeeEntities = null;
@@ -82,7 +85,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-//    @Cacheable(value = "employee")
+    @Cacheable(key = "#employeeId")
     public EmployeeResponseDTO findEmployeeByID(Integer employeeId) {
 
         EmployeeEntity employeeEntity = null;
@@ -107,7 +110,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-//    @Cacheable(value = "employee")
+    @CachePut(cacheNames = "employeeRequestDTO", key = "#employee.employeeId")
     public EmployeeResponseDTO updateEmployeeByEmployeeId(Integer employeeId, EmployeeRequestDTO employeeRequestDTO) {
 
         //Get the existing object

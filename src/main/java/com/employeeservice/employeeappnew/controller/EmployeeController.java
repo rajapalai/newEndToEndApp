@@ -8,7 +8,11 @@ import com.employeeservice.employeeappnew.exception.ResourceNotFoundException;
 import com.employeeservice.employeeappnew.service.EmployeeService;
 import com.employeeservice.employeeappnew.util.EmployeeAppUtil;
 import com.employeeservice.employeeappnew.util.ServiceResponse;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +39,14 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Operation(summary = "addEmployeeOnboardData")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",description = SUCCESS,
+            content = {
+                    @Content(mediaType = "application/json",schema = @Schema(implementation = EmployeeResponseDTO.class))
+            }),
+            @ApiResponse(responseCode = "400",description = FAILURE)
+    })
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<APIResponse> addEmployeeOnboardData(@RequestBody @Valid EmployeeRequestDTO employeeRequestDTO) {
